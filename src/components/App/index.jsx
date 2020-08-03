@@ -5,7 +5,7 @@ import './style.scss';
 class App extends Component {
   state = {
     score: 0,
-    round: 0
+    round: 2
   }
 
   render() {
