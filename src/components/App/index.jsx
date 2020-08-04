@@ -3,6 +3,7 @@ import birdsData from '../../data/birdsData';
 import Header from '../Header';
 import RandomBird from '../RandomBird';
 import BirdsList from '../BirdsList';
+import BirdInfo from '../BirdInfo';
 import './style.scss';
 
 class App extends Component {
@@ -19,6 +20,7 @@ class App extends Component {
         <RandomBird />
         <div className="row mb-2">
           <BirdsList data={this.state.data} />
+          <BirdInfo />
         </div>
       </div>
     );

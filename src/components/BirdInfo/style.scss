@@ -1,0 +1,20 @@
+.col-md-6 .bird-info {
+  display: flex;
+  padding: 1rem;
+  border: 1px solid #007c5d;
+  width: 100%;
+  color: #ffffff;
+}
+
+.start-text span {
+  display: block;
+  text-align: center;
+  cursor: default;
+}
+
+@media (max-width: 767px) {  
+  .col-md-6 .bird-info {
+    display: block;
+    margin-top: 25px;    
+  }
+}
