@@ -21,6 +21,7 @@ class App extends Component {
         <div className="row mb-2">
           <BirdsList data={this.state.data} />
           <BirdInfo />
+          <button className="btn">Next level</button>
         </div>
       </div>
     );
