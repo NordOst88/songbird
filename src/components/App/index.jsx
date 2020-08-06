@@ -20,7 +20,23 @@ class App extends Component {
   }
 
   nextLevelHandler = () => {
-    this.setState({selectedBird: randomizer(birdsData[0].length)})
+    const { roundEnded, round } = this.state
+    if (roundEnded && round < 5) {
+      this.setState((prevState) => ({
+        round: prevState.round + 1,
+        roundEnded: false,
+        scorePoints: 5,
+        selectedBird: randomizer(birdsData[0].length),
+      }));
+      this.clearIndicators()
+    }
+  }
+
+  clearIndicators = () => {
+    const indicatorsList = document.querySelectorAll('.answer-indicator');
+    indicatorsList.forEach((indicator) => {
+      indicator.style.background = null;
+    });
   }
 
   birdSelectHandler = (event, id) => {
@@ -31,10 +47,12 @@ class App extends Component {
     if (!roundEnded && selectedBird !== (id - 1)) {
       target.firstChild.style.backgroundColor = '#ee5f5b'
       audio.src = error
+      this.setState((prevState) => ({ scorePoints: prevState.scorePoints - 1 }));
     } else if (!roundEnded) {
       target.firstChild.style.backgroundColor = '#62c462'
       audio.src = win
       this.setState((prevState) => ({
+        score: prevState.score + this.state.scorePoints,
         roundEnded: true,
       }));
     }
@@ -42,17 +60,18 @@ class App extends Component {
   }
 
   render() {
-    const selectedBird = this.state.data[this.state.round][this.state.selectedBird]
-    console.log(`Right answer is: ${selectedBird.name}`)
+    const { data, round, selectedBird, score, roundEnded } = this.state
+    const selectedBirdData = data[round][selectedBird]
+    console.log(`Right answer is: ${selectedBirdData.name}`)
     return (
       <div className="container">
-        <Header score={this.state.score} round={this.state.round} />
-        <RandomBird selectedBird={selectedBird}/>
+        <Header score={score} round={round} />
+        <RandomBird selectedBird={selectedBirdData}/>
         <div className="row mb-2">
-          <BirdsList data={this.state.data} onBirdSelect={this.birdSelectHandler}/>
+          <BirdsList data={data} round={round} onBirdSelect={this.birdSelectHandler}/>
           <BirdInfo />
           <button
-           className={!this.state.roundEnded ? 'btn' : 'btn active'}
+           className={!roundEnded ? 'btn' : 'btn active'}
            onClick={this.nextLevelHandler}
           >
             Next level
