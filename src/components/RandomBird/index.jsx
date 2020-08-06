@@ -10,8 +10,8 @@ class RandomBird extends Component {
         <img className="img-bird" src={unknownBirdImage} alt="bird"/>
         <div>
           <ul className="list-group list-group-flush">
-            <li className="list-group-item"><h3>******</h3></li>
-            <li className="list-group-item"><AudioPlayer /></li>
+          <li className="list-group-item"><h3>******</h3></li>
+            <li className="list-group-item"><AudioPlayer audioSrc={this.props.selectedBird.audio} /></li>
           </ul>
         </div>
       </div>

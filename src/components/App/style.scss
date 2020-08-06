@@ -10,7 +10,6 @@
   background-color: #32383e;
   border: 1px solid #007c5d;
   color: #fff!important;
-  cursor: auto;
   -webkit-transition: .3s;
   transition: .3s;
   &:hover,
@@ -19,6 +18,13 @@
   &:not([disabled]):not(.disabled):active:hover,
   &:not([disabled]):not(.disabled).active:hover {
     border-color: #007c5d;
+  }
+  &.active {
+    background-color: #00bc8c;
+    &:hover {
+      text-shadow: 0 0 4px rgba(0, 0, 0, 1);
+      background-color: #00efb2;
+    }
   }
 }
 

@@ -25,6 +25,9 @@
     background-color: #00bc8c;
     color: #000000;
     font-weight: 600;
+    & > span {
+      box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    }
   }
 }
 
