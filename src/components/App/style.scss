@@ -13,7 +13,16 @@
   cursor: auto;
   -webkit-transition: .3s;
   transition: .3s;
-  &:focus {
-    box-shadow: none;
+  &:hover,
+  &:focus,
+  &:not([disabled]):not(.disabled):active,
+  &:not([disabled]):not(.disabled):active:hover,
+  &:not([disabled]):not(.disabled).active:hover {
+    border-color: #007c5d;
   }
+}
+
+.container .row {
+  margin-right: -14px;
+  margin-left: -14px;
 }

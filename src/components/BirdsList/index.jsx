@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './style.scss';
 
 class BirdsList extends Component {
+  //birdslist -> add li component
+  //onclick => onbirdselect
   render() {
     const list = this.props.data[0];
     const birdsList = list.map((bird) => 
