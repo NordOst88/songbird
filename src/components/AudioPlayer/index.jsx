@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import H5AudioPlayer, { RHAP_UI } from "react-h5-audio-player";
-// import win from '../../assets/audio/win.mp3';
 import './style.scss';
 
 class AudioPlayer extends Component {
@@ -8,6 +7,7 @@ class AudioPlayer extends Component {
     return (
       <div className="audio-player">
         <H5AudioPlayer
+          crossorigin="use-credentials"
           src={this.props.audioSrc}
           volume={0.8}
           autoPlay={false}

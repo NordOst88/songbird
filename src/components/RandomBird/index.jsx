@@ -5,13 +5,14 @@ import './style.scss';
 
 class RandomBird extends Component {
   render() {
+    const { selectedBird, roundEnded } = this.props
     return (
       <div className="bird jumbotron rounded">
-        <img className="img-bird" src={unknownBirdImage} alt="bird"/>
+        <img className="img-bird" src={roundEnded ? selectedBird.image : unknownBirdImage} alt="bird"/>
         <div>
           <ul className="list-group list-group-flush">
-          <li className="list-group-item"><h3>******</h3></li>
-            <li className="list-group-item"><AudioPlayer audioSrc={this.props.selectedBird.audio} /></li>
+            <li className="list-group-item"><h3>{roundEnded ? selectedBird.name : '******'}</h3></li>
+            <li className="list-group-item"><AudioPlayer audioSrc={selectedBird.audio} /></li>
           </ul>
         </div>
       </div>

@@ -66,7 +66,7 @@ class App extends Component {
     return (
       <div className="container">
         <Header score={score} round={round} />
-        <RandomBird selectedBird={selectedBirdData}/>
+        <RandomBird selectedBird={selectedBirdData} roundEnded={roundEnded} />
         <div className="row mb-2">
           <BirdsList data={data} round={round} onBirdSelect={this.birdSelectHandler}/>
           <BirdInfo />
