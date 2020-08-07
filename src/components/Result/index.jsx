@@ -1,17 +1,19 @@
 import React, { Component } from 'react';
 import './style.scss';
+import chickenWin from '../../assets/img/chicken-win.png';
 
 class Result extends Component {
   render() {
     const { gameEnded, score, startNewGame } = this.props
     const victory = (
       <div className="lead text-center">
-        Вы прошли викторину и набрали {score} из 30 возможных баллов
+        Вы прошли викторину и набрали <b>{score}</b> из <b>30</b> возможных баллов
       </div>
     )
     const flawlessVictory = (
       <div className="lead text-center">
-        Вы прошли викторину и набрали максимальные 30 баллов
+        <p>Вы одержали победу и набрали максимальные <b>30</b> баллов</p>
+        <img className="img-win" src={chickenWin} style={{width: '200px'}} alt="winner"/>
       </div>
     )
     return gameEnded ? (

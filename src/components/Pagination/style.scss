@@ -31,3 +31,9 @@
     box-shadow: none;
   }
 }
+
+@media (max-width: 470px) {  
+  .header .pagination {
+    font-size: 13px;
+  }
+}
