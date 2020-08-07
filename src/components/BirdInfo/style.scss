@@ -12,6 +12,21 @@
   cursor: default;
 }
 
+.bird-info .img-bird {
+  width: 200px;
+  height: 155px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 2rem;
+}
+
+.bird-info .card-body {
+  display: flex;
+  padding: 0;
+  flex-direction: row;
+  min-height: 173px;
+}
+
 @media (max-width: 767px) {  
   .col-md-6 .bird-info {
     display: block;

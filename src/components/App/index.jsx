@@ -16,7 +16,8 @@ class App extends Component {
     round: 0,
     roundEnded: false,
     data: birdsData,
-    selectedBird: randomizer(birdsData[0].length),
+    currentBird: randomizer(birdsData[0].length),
+    selectedBird: null,
   }
 
   nextLevelHandler = () => {
@@ -26,7 +27,8 @@ class App extends Component {
         round: prevState.round + 1,
         roundEnded: false,
         scorePoints: 5,
-        selectedBird: randomizer(birdsData[0].length),
+        currentBird: randomizer(birdsData[0].length),
+        selectedBird: null,
       }));
       this.clearIndicators()
     }
@@ -41,10 +43,10 @@ class App extends Component {
 
   birdSelectHandler = (event, id) => {
     const { target } = event
-    const { selectedBird, roundEnded } = this.state
+    const { currentBird, roundEnded } = this.state
     const audio = document.createElement('audio')
     audio.volume = 0.5
-    if (!roundEnded && selectedBird !== (id - 1)) {
+    if (!roundEnded && currentBird !== (id - 1)) {
       target.firstChild.style.backgroundColor = '#ee5f5b'
       audio.src = error
       this.setState((prevState) => ({ scorePoints: prevState.scorePoints - 1 }));
@@ -57,19 +59,21 @@ class App extends Component {
       }));
     }
     audio.play()
+    this.setState({ selectedBird: id })
   }
 
   render() {
-    const { data, round, selectedBird, score, roundEnded } = this.state
-    const selectedBirdData = data[round][selectedBird]
-    console.log(`Right answer is: ${selectedBirdData.name}`)
+    const { data, round, currentBird, score, roundEnded, selectedBird } = this.state
+    const currentBirdData = data[round][currentBird]
+    const selectedBirdData = data[round][selectedBird - 1]
+    console.log(`Right answer is: ${currentBirdData.name}`)
     return (
       <div className="container">
         <Header score={score} round={round} />
-        <RandomBird selectedBird={selectedBirdData} roundEnded={roundEnded} />
+        <RandomBird currentBird={currentBirdData} roundEnded={roundEnded} />
         <div className="row mb-2">
           <BirdsList data={data} round={round} onBirdSelect={this.birdSelectHandler}/>
-          <BirdInfo />
+          <BirdInfo selectedBirdData={selectedBirdData}/>
           <button
            className={!roundEnded ? 'btn' : 'btn active'}
            onClick={this.nextLevelHandler}
