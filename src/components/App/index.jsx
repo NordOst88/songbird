@@ -64,9 +64,11 @@ class App extends Component {
 
   render() {
     const { data, round, currentBird, score, roundEnded, selectedBird } = this.state
-    const currentBirdData = data[round][currentBird]
     const selectedBirdData = data[round][selectedBird - 1]
-    console.log(`Right answer is: ${currentBirdData.name}`)
+    const currentBirdData = data[round][currentBird]
+    if (selectedBird === null) {
+      console.log(`Right answer is: ${currentBirdData.name}`)
+    }
     return (
       <div className="container">
         <Header score={score} round={round} />
