@@ -4,6 +4,7 @@ import Header from '../Header';
 import RandomBird from '../RandomBird';
 import BirdsList from '../BirdsList';
 import BirdInfo from '../BirdInfo';
+import Result from '../Result';
 import randomizer from '../../utils/randomizer'
 import './style.scss';
 import win from '../../assets/audio/win.mp3';
@@ -15,6 +16,7 @@ class App extends Component {
     scorePoints: 5,
     round: 0,
     roundEnded: false,
+    gameEnded: false,
     data: birdsData,
     currentBird: randomizer(birdsData[0].length),
     selectedBird: null,
@@ -31,6 +33,8 @@ class App extends Component {
         selectedBird: null,
       }));
       this.clearIndicators()
+    } else if (round === 5) {
+      this.setState(() => ({ gameEnded: true }));
     }
   }
 
@@ -62,8 +66,21 @@ class App extends Component {
     this.setState({ selectedBird: id })
   }
 
+  startNewGameHandler = () => {
+    this.setState((prevState) => ({
+      score: 0,
+      scorePoints: 5,
+      round: 0,
+      roundEnded: false,
+      gameEnded: false,
+      currentBird: randomizer(birdsData[0].length),
+      selectedBird: null,
+    }));
+    this.clearIndicators()
+  }
+
   render() {
-    const { data, round, currentBird, score, roundEnded, selectedBird } = this.state
+    const { data, round, currentBird, score, roundEnded, selectedBird, gameEnded } = this.state
     const selectedBirdData = data[round][selectedBird - 1]
     const currentBirdData = data[round][currentBird]
     if (selectedBird === null) {
@@ -72,8 +89,9 @@ class App extends Component {
     return (
       <div className="container">
         <Header score={score} round={round} />
-        <RandomBird currentBird={currentBirdData} roundEnded={roundEnded} />
-        <div className="row mb-2">
+        <Result score={score} startNewGame={this.startNewGameHandler} gameEnded={gameEnded} />
+        <RandomBird currentBird={currentBirdData} roundEnded={roundEnded} gameEnded={gameEnded} />
+        <div className="row mb-2" style={{display: gameEnded ? 'none' : 'flex'}}>
           <BirdsList data={data} round={round} onBirdSelect={this.birdSelectHandler}/>
           <BirdInfo selectedBirdData={selectedBirdData}/>
           <button

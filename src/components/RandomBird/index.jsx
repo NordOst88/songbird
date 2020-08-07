@@ -5,8 +5,8 @@ import './style.scss';
 
 class RandomBird extends Component {
   render() {
-    const { currentBird, roundEnded } = this.props
-    return (
+    const { currentBird, roundEnded, gameEnded } = this.props
+    return !gameEnded ? (
       <div className="bird jumbotron rounded">
         <img className="img-bird" src={roundEnded ? currentBird.image : unknownBirdImage} alt="bird"/>
         <div>
@@ -16,7 +16,7 @@ class RandomBird extends Component {
           </ul>
         </div>
       </div>
-    );
+    ) : false ;
   }
 }
 
