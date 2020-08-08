@@ -15,6 +15,7 @@ class AudioPlayer extends Component {
           showJumpControls={false}
           showDownloadProgress={false}
           customAdditionalControls={[]}
+          ref={this.props.createRef}
           customProgressBarSection={
             [
               RHAP_UI.CURRENT_TIME,

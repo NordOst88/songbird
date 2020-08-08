@@ -12,7 +12,7 @@ class RandomBird extends Component {
         <div>
           <ul className="list-group list-group-flush">
             <li className="list-group-item"><h3>{roundEnded ? currentBird.name : '******'}</h3></li>
-            <li className="list-group-item"><AudioPlayer audioSrc={currentBird.audio} /></li>
+            <li className="list-group-item"><AudioPlayer audioSrc={currentBird.audio} createRef={this.props.createRef}/></li>
           </ul>
         </div>
       </div>

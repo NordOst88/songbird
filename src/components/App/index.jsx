@@ -57,6 +57,7 @@ class App extends Component {
     } else if (!roundEnded) {
       target.firstChild.style.backgroundColor = '#62c462'
       audio.src = win
+      this.player.audio.current.pause()
       this.setState((prevState) => ({
         score: prevState.score + this.state.scorePoints,
         roundEnded: true,
@@ -64,6 +65,10 @@ class App extends Component {
     }
     audio.play()
     this.setState({ selectedBird: id })
+  }
+
+  createRefToPlayer = (current) => {
+    this.player = current
   }
 
   startNewGameHandler = () => {
@@ -90,7 +95,7 @@ class App extends Component {
       <div className="container">
         <Header score={score} round={round} />
         <Result score={score} startNewGame={this.startNewGameHandler} gameEnded={gameEnded} />
-        <RandomBird currentBird={currentBirdData} roundEnded={roundEnded} gameEnded={gameEnded} />
+        <RandomBird currentBird={currentBirdData} roundEnded={roundEnded} gameEnded={gameEnded} createRef={this.createRefToPlayer} />
         <div className="row mb-2" style={{display: gameEnded ? 'none' : 'flex'}}>
           <BirdsList data={data} round={round} onBirdSelect={this.birdSelectHandler}/>
           <BirdInfo selectedBirdData={selectedBirdData}/>
