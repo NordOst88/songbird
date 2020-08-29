@@ -39,9 +39,10 @@ class App extends Component {
   }
 
   clearIndicators = () => {
-    const indicatorsList = document.querySelectorAll('.answer-indicator');
-    indicatorsList.forEach((indicator) => {
-      indicator.style.background = null;
+    const itemList = document.querySelectorAll('.list-group-item');
+    itemList.forEach((item) => {
+      item.dataset.clicked = false;
+      item.firstChild.style.backgroundColor = null;
     });
   }
 
@@ -51,9 +52,12 @@ class App extends Component {
     const audio = document.createElement('audio')
     audio.volume = 0.5
     if (!roundEnded && currentBird !== (id - 1)) {
-      target.firstChild.style.backgroundColor = '#ee5f5b'
       audio.src = error
-      this.setState((prevState) => ({ scorePoints: prevState.scorePoints - 1 }));
+      if (target.dataset.clicked === undefined || target.dataset.clicked === 'false') {
+        target.firstChild.style.backgroundColor = '#ee5f5b';
+        this.setState((prevState) => ({ scorePoints: prevState.scorePoints - 1 }));
+        target.dataset.clicked = true;
+      }
     } else if (!roundEnded) {
       target.firstChild.style.backgroundColor = '#62c462'
       audio.src = win
