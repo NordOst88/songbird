@@ -9,8 +9,8 @@ Songbird is a SPA quiz for recognizing birds by their voices.
 ## Installation and Usage
 
 
-To install: `npm install`
-To start: `npm start`
+- To install: `npm install`
+- To start: `npm start`
 
 ## Tech stack
 
