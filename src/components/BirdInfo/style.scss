@@ -1,0 +1,92 @@
+.col-md-6 .bird-info {
+  display: flex;
+  padding: 1rem;
+  border: 1px solid #007c5d;
+  width: 100%;
+  color: #ffffff;
+}
+
+.start-text span {
+  display: block;
+  text-align: center;
+  cursor: default;
+}
+
+.bird-info .img-bird {
+  width: 200px;
+  height: 155px;
+  border-radius: 10px;
+  object-fit: cover;
+  margin-right: 1rem;
+}
+
+.bird-info .card-body {
+  display: flex;
+  padding: 0;
+  flex-direction: row;
+  min-height: 173px;
+}
+
+.card-body .list-group {
+  width: calc(100% - 220px);
+}
+
+.bird-info .list-group-item {
+  padding: .25rem;
+  border-color: #007c5d;
+  cursor: default;
+  &:hover {
+    background-color: #32383e;
+  }
+  & > h5 {
+    margin-bottom: 0.2rem;
+  }
+  & > .audio-player {
+    margin-top: 5px;
+  }
+}
+
+.bird-info .bird-description {
+  font-size: 0.8rem;
+}
+
+@media (max-width: 992px) {
+  .bird-info .card-body {
+    flex-direction: column;
+  }
+  .bird-info .img-bird {
+    display: block;
+    margin: 0 auto 25px;
+  }
+  .card-body .list-group {
+    width: 100%;
+  }
+}
+
+@media (max-width: 767px) {  
+  .col-md-6 .bird-info {
+    display: block;
+    margin-top: 25px;    
+  }
+  .bird-info .card-body {
+    flex-direction: row;
+  }
+  .bird-info .img-bird {
+    margin-right: 2rem;
+  }
+}
+
+@media (max-width: 570px) {  
+  .bird-info .card-body {
+    flex-direction: column;
+  }
+  
+  .bird-info .img-bird {
+    margin: 0 auto 25px;
+  }
+  
+  h5,
+  .card-body .list-group-item:nth-child(2) {
+    text-align: center;
+  }
+}

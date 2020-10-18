@@ -1,0 +1,19 @@
+const INDICATOR_MODIFIERS = {
+  RIGHT: 'rightAnswer',
+  WRONG: 'wrongAnswer',
+};
+
+const HIDDEN_TEXT = '******';
+const ROUND_INIT_STATE = 0;
+const SCORE_INIT_STATE = 0;
+const POINTS_INIT_STATE = 5;
+const SELECTED_BIRD_INIT_STATE = null;
+
+export {
+  INDICATOR_MODIFIERS,
+  HIDDEN_TEXT,
+  ROUND_INIT_STATE,
+  SCORE_INIT_STATE,
+  POINTS_INIT_STATE,
+  SELECTED_BIRD_INIT_STATE,
+};

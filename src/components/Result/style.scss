@@ -1,0 +1,35 @@
+.result .btn-try-again {
+  width: 100%;
+  padding: 15px;
+  margin: 25px 0;
+  background-color: #00bc8c;
+  color: #ffffff;
+  &:hover {
+    background-color: #00efb2;
+    color: #ffffff;
+  }
+}
+
+.mb-4, .my-4 {
+  border-color: #007c5d;
+}
+
+.result {
+  color: #f2f2f2;
+}
+
+.img-win {
+  margin: 0 auto;
+}
+
+@media (max-width: 767px) {  
+  h1.display-3 {
+    font-size: 3rem;    
+  }
+}
+
+@media (max-width: 470px) {  
+  h1.display-3 {
+    font-size: 2rem;    
+  }
+}
