@@ -1,118 +1,57 @@
-import React, { Component } from 'react';
-import birdsData from '../../data/birdsData';
+/* eslint-disable no-console */
+import React, { useState, useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { selectRoundNumber } from '../../reducers/roundNumber';
+import { selectGameEnded } from '../../reducers/gameEnded';
+import { setData } from '../../reducers/data';
+import { setCurrentBird } from '../../reducers/currentBird';
+
 import Header from '../Header';
+import Spinner from '../Spinner';
 import RandomBird from '../RandomBird';
-import BirdsList from '../BirdsList';
-import BirdInfo from '../BirdInfo';
+import ContentContainer from '../ContentContainer';
 import Result from '../Result';
-import randomizer from '../../utils/randomizer'
+
+import birdsData from '../../data/birdsData';
+
+import randomizer from '../../utils/randomizer';
+
 import './style.scss';
-import win from '../../assets/audio/win.mp3';
-import error from '../../assets/audio/error.mp3';
 
-class App extends Component {
-  state = {
-    score: 0,
-    scorePoints: 5,
-    round: 0,
-    roundEnded: false,
-    gameEnded: false,
-    data: birdsData,
-    currentBird: randomizer(birdsData[0].length),
-    selectedBird: null,
-  }
+const App = () => {
+  const [loading, setLoading] = useState(true);
+  const dispatch = useDispatch();
+  const round = useSelector(selectRoundNumber);
+  const gameEnded = useSelector(selectGameEnded);
+  const rndBird = randomizer(birdsData[round].length);
 
-  nextLevelHandler = () => {
-    const { roundEnded, round } = this.state
-    if (roundEnded && round < 5) {
-      this.setState((prevState) => ({
-        round: prevState.round + 1,
-        roundEnded: false,
-        scorePoints: 5,
-        currentBird: randomizer(birdsData[0].length),
-        selectedBird: null,
-      }));
-      this.clearIndicators()
-    } else if (round === 5) {
-      this.setState(() => ({ gameEnded: true }));
-    }
-  }
+  useEffect(() => {
+    dispatch(setData(birdsData));
+    setLoading(false);
+  }, [dispatch]);
 
-  clearIndicators = () => {
-    const itemList = document.querySelectorAll('.list-group-item');
-    itemList.forEach((item) => {
-      item.dataset.clicked = false;
-      item.firstChild.style.backgroundColor = null;
-    });
-  }
+  useEffect(() => {
+    console.log('Current bird is:', rndBird + 1, birdsData[round][rndBird].name);
+    dispatch(setCurrentBird(rndBird));
+  }, [dispatch, round]); // eslint-disable-line
 
-  birdSelectHandler = (event, id) => {
-    const { target } = event
-    const { currentBird, roundEnded } = this.state
-    const audio = document.createElement('audio')
-    audio.volume = 0.5
-    if (!roundEnded && currentBird !== (id - 1)) {
-      audio.src = error
-      if (target.dataset.clicked === undefined || target.dataset.clicked === 'false') {
-        target.firstChild.style.backgroundColor = '#ee5f5b';
-        this.setState((prevState) => ({ scorePoints: prevState.scorePoints - 1 }));
-        target.dataset.clicked = true;
-      }
-    } else if (!roundEnded) {
-      target.firstChild.style.backgroundColor = '#62c462'
-      audio.src = win
-      this.player.audio.current.pause()
-      this.setState((prevState) => ({
-        score: prevState.score + this.state.scorePoints,
-        roundEnded: true,
-      }));
-    }
-    audio.play()
-    this.setState({ selectedBird: id })
-  }
-
-  createRefToPlayer = (current) => {
-    this.player = current
-  }
-
-  startNewGameHandler = () => {
-    this.setState((prevState) => ({
-      score: 0,
-      scorePoints: 5,
-      round: 0,
-      roundEnded: false,
-      gameEnded: false,
-      currentBird: randomizer(birdsData[0].length),
-      selectedBird: null,
-    }));
-    this.clearIndicators()
-  }
-
-  render() {
-    const { data, round, currentBird, score, roundEnded, selectedBird, gameEnded } = this.state
-    const selectedBirdData = data[round][selectedBird - 1]
-    const currentBirdData = data[round][currentBird]
-    if (selectedBird === null) {
-      console.log(`Right answer is: ${currentBirdData.name}`)
-    }
-    return (
-      <div className="container">
-        <Header score={score} round={round} />
-        <Result score={score} startNewGame={this.startNewGameHandler} gameEnded={gameEnded} />
-        <RandomBird currentBird={currentBirdData} roundEnded={roundEnded} gameEnded={gameEnded} createRef={this.createRefToPlayer} />
-        <div className="row mb-2" style={{display: gameEnded ? 'none' : 'flex'}}>
-          <BirdsList data={data} round={round} onBirdSelect={this.birdSelectHandler}/>
-          <BirdInfo selectedBirdData={selectedBirdData}/>
-          <button
-           className={!roundEnded ? 'btn' : 'btn active'}
-           onClick={this.nextLevelHandler}
-          >
-            Next level
-          </button>
-        </div>
-      </div>
+  const Content = () =>
+    !gameEnded ? (
+      <>
+        <RandomBird />
+        <ContentContainer />
+      </>
+    ) : (
+      <Result />
     );
-  }
-}
+
+  return (
+    <div className="container">
+      <Header />
+      {loading ? <Spinner /> : <Content />}
+    </div>
+  );
+};
 
 export default App;

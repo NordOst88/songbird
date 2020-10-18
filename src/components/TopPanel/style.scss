@@ -1,5 +1,5 @@
 .header .logo {
-  background-image: url("../../assets/img/logo.png");
+  background-image: url('../../assets/img/logo.png');
   width: 200px;
   height: 75px;
   background-size: contain;
@@ -15,7 +15,7 @@
   }
 }
 
-@media (max-width: 470px) {  
+@media (max-width: 470px) {
   .top-panel {
     & > h5 {
       font-size: 1rem;

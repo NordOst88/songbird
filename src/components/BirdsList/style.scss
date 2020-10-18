@@ -1,36 +1,7 @@
-.answer-indicator {
-  display: inline-block;
-    width: 10px;
-    height: 10px;
-    margin-right: 15px;
-    border-radius: 50%;
-    -webkit-transition: .1s;
-    transition: .1s;
-    background-color: #737373;
-}
-
 .col-md-6 {
   display: flex;
 }
 
 .list {
   width: 100%;
-}
-
-.list.list-group .list-group-item {
-  border: 1px solid #007c5d;
-  color: #ffffff;
-  cursor: pointer;
-  &:hover {
-    background-color: #00bc8c;
-    color: #000000;
-    font-weight: 600;
-    & > span {
-      box-shadow: 0 0 10px rgba(0,0,0,0.5);
-    }
-  }
-}
-
-.list.list-group .list-group-item+ .list-group-item {
-  border-top-width: 0;
 }

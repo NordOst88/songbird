@@ -9,30 +9,30 @@
   font-size: 14px;
 }
 
-.pagination a.page-link:hover {
-  background-image: linear-gradient(#484e55, #3A3F44 60%, #313539);
+.pagination span.page-link:hover {
+  background-image: linear-gradient(#484e55, #3a3f44 60%, #313539);
 }
 
 .header > ul > li {
   flex: auto;
   text-align: center;
-  & > a {
+  & > span {
     cursor: default;
   }
 }
 
-.pagination .page-item.active a.page-link {
+.pagination .page-item.active span.page-link {
   background-image: linear-gradient(#007c5d, #00bc8c 40%, #007c5d);
 }
 
-.pagination .page-item a.page-link {
+.pagination .page-item span.page-link {
   border: none;
   &:focus {
     box-shadow: none;
   }
 }
 
-@media (max-width: 470px) {  
+@media (max-width: 470px) {
   .header .pagination {
     font-size: 13px;
   }
